@@ -1,6 +1,6 @@
 Summary: Tool for Measuring String Similarity
 Name: harry
-Version: 0.2
+Version: 0.4.0
 Release: 1.fdm
 Source0: http://www.mlsec.org/harry/files/%{name}-%{version}.tar.gz 
 License: GPL3
@@ -22,15 +22,18 @@ implicit similarity measures, that is, comparison functions that do not
 give rise to an explicit vector space. Examples of such similarity measures
 are the Levenshtein distance and the Jaro-Winkler distance.
 
+%global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
+
 %prep
 %setup -n %{name}-%{version}
 
 %build
 %{configure} --enable-libarchive --enable-openmp --enable-md5hash
-%{__make} check
+%{__make}
 
 %install
 %{makeinstall}
+rm -rf %{buildroot}/usr/lib/python2.7/site-packages/harry.py?
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -38,5 +41,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %{_bindir}/harry
+/usr/lib/python2.7/site-packages/harry.py
 %{_mandir}/man?/*
-%doc README.md COPYING CHANGES TODO.md doc/harry.txt doc/example.cfg
+%doc README.md COPYING CHANGES doc/harry.txt doc/example.cfg

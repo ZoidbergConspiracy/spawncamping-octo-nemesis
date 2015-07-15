@@ -1,6 +1,6 @@
 Summary: Tool for Emebeding Strings in Vector Spaces
 Name: sally
-Version: 0.8.3
+Version: 1.0.0
 Release: 1.fdm
 Source0: http://www.mlsec.org/sally/files/%{name}-%{version}.tar.gz 
 License: GPL3
@@ -27,7 +27,7 @@ archives and text files.
 
 %build
 %{configure} --enable-libarchive --enable-openmp --enable-md5hash
-%{__make} check
+%{__make}
 
 %install
 %{makeinstall}
@@ -39,4 +39,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_bindir}/sally
 %{_mandir}/man?/*
-%doc README.md COPYING CHANGES TODO doc/sally.txt doc/example.cfg
+%doc README.md COPYING CHANGES doc/sally.txt doc/example.cfg

@@ -1,5 +1,5 @@
 
-FDMHOST=root@forge
+FDMHOST=root@lanka
 FDMROOT=/var/www/html/fdm
 
 FDMDST=$(shell lsb_release -i | cut -d ':' -f 2 | sed -e 's/[[:space:]]//' | tr 'A-Z' 'a-z' )
