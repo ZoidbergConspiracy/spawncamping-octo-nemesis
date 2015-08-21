@@ -5,32 +5,43 @@ Group: System/Utilities
 Url: http://www.consul.io
 Vendor: Hashicorp
 
-Version: git20150711.00e35cdc41
+Version: 0.5.2
 Release: fdm
 BuildArch: x86_64
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Prefix: %{_prefix}
-Source0: consul.service
-Source1: consul.sysconfig
-Source2: consul.base
+Source: https://github.com/hashicorp/consul/archive/v%{version}.tar.gz
+Source1: consul.service
+Source2: consul.sysconfig
+Source3: consul.base
 
 %description
 Consul is a tool for service discovery and configuration.
 Consul is distributed, highly available, and extremely scalable.
 
 %prep
-mkdir -p %{name}-%{version}
+%setup -cT
+export GOPATH=`pwd`
+%{__mkdir} -p src/github.com/hashicorp
+git clone https://github.com/hashicorp/consul.git src/github.com/hashicorp/consul
+(
+  cd src/github.com/hashicorp/consul
+  git checkout tags/v%{version}
+)
 
 %build
 export GOPATH=`pwd`
-go get -u github.com/hashicorp/consul
+(
+  cd src/github.com/hashicorp/consul
+  %{__make}
+)
 
 %install
-%{__install} -D bin/consul %{buildroot}%{_bindir}/consul
-%{__install} -D %{SOURCE0} %{buildroot}%{_unitdir}/consul.service
-%{__install} -D %{SOURCE1} %{buildroot}%{_sysconfdir}/sysconfig/consul
-%{__install} -D %{SOURCE2} %{buildroot}%{_sysconfdir}/consul.d/base.json
+%{__install} -D src/github.com/hashicorp/consul/bin/consul %{buildroot}%{_bindir}/consul
+%{__install} -D %{SOURCE1} %{buildroot}%{_unitdir}/consul.service
+%{__install} -D %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/consul
+%{__install} -D %{SOURCE3} %{buildroot}%{_sysconfdir}/consul.d/base.json
 %{__install} -d %{buildroot}%{_sharedstatedir}/consul
 
 %clean
