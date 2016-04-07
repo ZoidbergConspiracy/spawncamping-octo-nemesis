@@ -7,7 +7,7 @@ Group: Development/Tools
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM 6
 
-Version: svn.20140718
+Version: 0.3.0
 Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
 BuildArch: noarch
@@ -19,8 +19,6 @@ BuildArch: noarch
 
 # Turn off the brp-python-bytecompile script
 %global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
-
-Source: https://pypi.python.org/packages/source/g/%{python_package}/%{python_package}.tar.gz
 
 %description
 Manage your spreadsheets with gspread in Python.
@@ -34,11 +32,15 @@ Features:
 
 
 %changelog
+* Thu Apr  7 2016 Thornton Prime <thornton.prime@gmail.com> [0.3.0]
+- Updated to pull directly from git
 * Sat Oct 27 2012 Thornton Prime <thornton@yoyoweb.com> []
 - 
 
 %prep
-%setup -q -n %{python_package}
+%setup -cT
+
+git clone --branch v%{version} https://github.com/burnash/gspread.git .
 
 %build
 env CFLAGS="%{optflags}" %{__python} setup.py build

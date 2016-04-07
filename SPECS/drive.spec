@@ -1,6 +1,6 @@
 Name: drive
 Summary: Pull or Push Google Drive Files
-Version: git20150711.9050e2b2da
+Version: 0.3.5
 Release: fdm
 License: Apache 2.0
 Group: System/Utilities
@@ -13,14 +13,20 @@ Url: https://github.com/odeke-em/drive
 drive is a tiny program to pull or push Google Drive files.
 
 %prep
-mkdir -p %{name}-%{version}
+
+%setup -cT
+export GOPATH=`pwd`
+
+mkdir -p src/github.com/odeke-em/drive
+git clone --branch v%{version} https://github.com/odeke-em/drive.git src/github.com/odeke-em/drive
+go get -f -u ./... || true
 
 %build
 export GOPATH=`pwd`
-go get -u github.com/odeke-em/drive/cmd/drive
+go build github.com/odeke-em/drive/cmd/drive
 
 %install
-%{__install} -D bin/drive ${RPM_BUILD_ROOT}%{_bindir}/drive
+%{__install} -D drive ${RPM_BUILD_ROOT}%{_bindir}/drive
 
 %clean
 rm -rf $RPM_BUILD_ROOT

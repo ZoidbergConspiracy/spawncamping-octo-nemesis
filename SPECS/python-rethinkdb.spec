@@ -7,7 +7,7 @@ Group: Development/Tools
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM
 
-Version: 2.0.0_2
+Version: 2.2.0.post3
 Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
 BuildArch: noarch
@@ -30,7 +30,7 @@ Python client driver for RethinkDB.
 - Initial build based off git snapshot.
 
 %prep
-%setup -q -n %{python_package}-2.0.0-2
+%setup -q -n %{python_package}-%{version}
 
 %build
 env CFLAGS="%{optflags}" %{__python} setup.py build
