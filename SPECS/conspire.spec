@@ -1,6 +1,6 @@
 Name: conspire
 Summary: Share Secrets with Friends
-Version: 0.9.0
+Version: 0.9.5
 Release: fdm
 License: MIT
 Group: System/Utilities
@@ -20,18 +20,26 @@ Sharing secrets among groups of people with GPG is a little awkward,
 because there is no facility to manage groups. This tool aims to make it
 simpler to manage secrets among groups.
 
+%changelog
+* Thu Apr  7 2016 Thornton Prime <thornton.prime@gmail.com> [0.9.5]
+- Fixed paths.
+- Update to v0.9.5
+* Thu Apr  7 2016 Thornton Prime <thornton.prime@gmail.com> [0.9.0]
+- Updated to pull directly from git
+
+
 %prep
 
 %setup -cT
 export GOPATH=`pwd`
 
 mkdir -p src/github.com/odeke-em/conspire
-git clone --branch v%{version} https://github.com/ZoidbergConspiracy/conspire.git src/github.com/ZoidbergConspiracy/conspire
+git clone --branch v%{version} https://github.com/zoidbergconspiracy/conspire.git src/github.com/zoidbergconspiracy/conspire
 go get -f -u ./... || true
 
 %build
 export GOPATH=`pwd`
-go build github.com/ZoidbergConspiracy/conspire
+go build github.com/zoidbergconspiracy/conspire
 
 %install
 %{__install} -D conspire ${RPM_BUILD_ROOT}%{_bindir}/conspire

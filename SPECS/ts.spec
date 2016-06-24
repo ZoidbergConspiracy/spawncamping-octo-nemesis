@@ -1,6 +1,6 @@
 Summary: Task Spooler Unix Batch System
 Name: ts
-Version: 0.7.5
+Version: 0.7.6
 Release: 0.fdm
 Source0: http://vicerveza.homeunix.net/~viric/soft/ts/%{name}-%{version}.tar.gz
 License: GPL2
