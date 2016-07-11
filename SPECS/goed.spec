@@ -1,8 +1,8 @@
 Name: goed
 Summary: Terminal based code/text editor
-Release: fdm
 License: MIT
 Group: Applications/Editors
+Release: 1.fdm
 
 %define git_version_prefix 0
 %define git_version_date 20160514
@@ -31,13 +31,16 @@ export GOPATH=`pwd`
 
 git clone https://github.com/%{git_package}.git src/github.com/%{git_package}
 (cd src/github.com/%{git_package}; git reset --hard %{git_version_tag} )
+go get github.com/%{git_package}/...
 
 %build
 export GOPATH=`pwd`
-go get -u github.com/%{git_package}
+go build github.com/%{git_package}/...
+go install github.com/%{git_package}/...
 
 %install
 %{__install} -D bin/goed ${RPM_BUILD_ROOT}%{_bindir}/goed
+%{__install} -D bin/goed_api ${RPM_BUILD_ROOT}%{_bindir}/goed_api
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -45,5 +48,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %{_bindir}/goed
+%{_bindir}/goed_api
 
 

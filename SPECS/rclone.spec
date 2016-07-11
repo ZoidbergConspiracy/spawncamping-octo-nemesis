@@ -1,14 +1,21 @@
 Name: rclone
 Summary: Sync files to and from multiple cloud services
-Version: 1.29
-Release: fdm
 License: MIT
 Group: Applications/Internet
 Url: http://rclone.org/
 
+%define git_version 1.30
+%define git_package ncw/rclone
+
+Version: %{git_version}
+Release: fdm
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Prefix: %{_prefix}
 BuildArch: x86_64
+
+%changelog
+* Tue Jun 28 2016 Thornton Prime <thornton.prime@gmail.com> [1.30]
+- Current version.
 
 %description
 
@@ -34,31 +41,28 @@ Features
   * Check mode to check for file hash equality
   * Can sync to and from network, eg two different cloud accounts
 
-%prep
+%files
+%defattr(-,root,root)
+%{_bindir}/rclone
+%{_mandir}/man1/rclone*
+%doc src/github.com/ncw/rclone/{README.md,MANUAL*,RELEASE*,CONTRIBUTING*,COPYING*}
 
+%prep
 %setup -cT
 export GOPATH=`pwd`
-
-mkdir -p src/github.com/ncw/rclone
-git clone --branch v%{version} https://github.com/ncw/rclone.git src/github.com/ncw/rclone
+git clone https://github.com/%{git_package}.git src/github.com/%{git_package}
+(cd src/github.com/%{git_package}; git checkout -b v%{git_version} )
 go get -f -u ./... || true
 
 %build
 export GOPATH=`pwd`
-go build github.com/ncw/rclone
+go build github.com/%{git_package}
 
 %install
 
 %{__install} -D rclone ${RPM_BUILD_ROOT}%{_bindir}/rclone
 %{__install} -D src/github.com/ncw/rclone/rclone.1 ${RPM_BUILD_ROOT}%{_mandir}/man1/rclone.1
 
-
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%files
-%defattr(-,root,root)
-%{_bindir}/rclone
-%{_mandir}/man1/rclone*
-%doc src/github.com/ncw/rclone/{README.md,MANUAL*,RELEASE*,CONTRIBUTING*,COPYING*}
 
