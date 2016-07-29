@@ -1,11 +1,11 @@
-Name: pget
-Summary: Parallel Download Client
-License: GPL
-Group: Applications/Internet
-Url: https://github.com/Code-Hex/pget
+Name: sup
+Summary: Super Simple Deployment Tool
+License: MIT
+Group: Utilities/Management
+Url: https://pressly.github.io/sup
 
-%define git_version 0.0.1
-%define git_package Code-Hex/pget
+%define git_version 0.4.1
+%define git_package pressly/sup
 
 Version: %{git_version}
 Release: fdm
@@ -14,17 +14,17 @@ Prefix: %{_prefix}
 BuildArch: x86_64
 
 %changelog
-* Tue Jul  5 2016 Thornton Prime <thornton.prime@gmail.com> [0.0.1]
+* Fri Jul 29 2016 Thornton Prime <thornton.prime@gmail.com> [0.0.1]
 - Current version.
 
 %description
-
-Parallel file download.
+Super simple deployment tool - just Unix - think of it like 'make' for a network
+of servers. 
 
 %files
 %defattr(-,root,root)
-%{_bindir}/pget
-%doc src/github.com/%{git_package}/{README.md,MANUAL*,RELEASE*,CONTRIBUTING*,COPYING*}
+%{_bindir}/sup
+%doc src/github.com/%{git_package}/{README.md,LICENSE}
 
 %prep
 %setup -cT
@@ -35,11 +35,10 @@ go get -f -u github.com/%{git_package}/... || true
 
 %build
 export GOPATH=`pwd`
-go build github.com/%{git_package}/cmd/pget
+go build github.com/%{git_package}/cmd/sup
 
 %install
-
-%{__install} -D pget ${RPM_BUILD_ROOT}%{_bindir}/pget
+%{__install} -D sup ${RPM_BUILD_ROOT}%{_bindir}/sup
 
 %clean
 rm -rf $RPM_BUILD_ROOT
