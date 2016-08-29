@@ -4,7 +4,7 @@ License: MIT
 Group: Applications/Internet
 Url: http://rclone.org/
 
-%define git_version 1.30
+%define git_version 1.32
 %define git_package ncw/rclone
 
 Version: %{git_version}
@@ -14,6 +14,9 @@ Prefix: %{_prefix}
 BuildArch: x86_64
 
 %changelog
+* Thu Aug 18 2016 Thornton Prime <thornton.prime@gmail.com> [1.32]
+- Update to 1.32
+- Build with go1.7
 * Tue Jun 28 2016 Thornton Prime <thornton.prime@gmail.com> [1.30]
 - Current version.
 
@@ -48,18 +51,23 @@ Features
 %doc src/github.com/ncw/rclone/{README.md,MANUAL*,RELEASE*,CONTRIBUTING*,COPYING*}
 
 %prep
+
 %setup -cT
 export GOPATH=`pwd`
 git clone https://github.com/%{git_package}.git src/github.com/%{git_package}
-(cd src/github.com/%{git_package}; git checkout -b v%{git_version} )
-go get -f -u ./... || true
+(
+  cd src/github.com/%{git_package}
+  git checkout -b v%{git_version}
+  git branch --set-upstream-to=origin/master v%{git_version}
+)
+go get -f -u github.com/%{git_package}/... || true
+
 
 %build
 export GOPATH=`pwd`
 go build github.com/%{git_package}
 
 %install
-
 %{__install} -D rclone ${RPM_BUILD_ROOT}%{_bindir}/rclone
 %{__install} -D src/github.com/ncw/rclone/rclone.1 ${RPM_BUILD_ROOT}%{_mandir}/man1/rclone.1
 
