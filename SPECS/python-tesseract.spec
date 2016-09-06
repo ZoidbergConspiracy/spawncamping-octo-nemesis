@@ -1,30 +1,27 @@
-Name: python-rethinkdb
-Summary: Python RethinkDB Driver
+Name: python-tesseract
+Summary: Python Bindings for Tesseract OCR
 License: Apache
-URL: https://github.com/uiri/rethinkdb
+URL: http://mstamy2.github.com/tesseract
 Group: Development/Tools
 
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM
 
-%define python_package rethinkdb
+%define python_package pytesseract
 
-Version: 2.3.0.post6
+Version: 0.1.6
 Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
-BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source: %{python_package}-%{version}.tar.gz
 
 %changelog
-* Thu Sep 01 2016 Thornton Prime <thornton.prime@gmail.com> [2.3.0.post6]
+* Thu Sep 01 2016 Thornton Prime <thornton.prime@gmail.com> [1.26.0]
 - Build for FDM24
 
-* Thu Jun 19 2014 Thornton Prime <thornton.prime@gmail.com> [0.0.9.20140619]
-- Initial build based off git snapshot.
-
 %description
-Python client driver for RethinkDB.
+Python-tesseract is an optical character recognition (OCR) tool for python.
+That is, it will recognize and "read" the text embedded in images.
 
 %define python_version %( python -c 'import sys; print sys.version.split()[0]' )
 %define python_version_short %( python -c 'import sys; print ".".join(sys.version.split()[0].split(".")[:2])' )
