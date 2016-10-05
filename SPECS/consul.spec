@@ -5,7 +5,7 @@ Group: System/Utilities
 Url: http://www.consul.io
 Vendor: Hashicorp
 
-Version: 0.6.4
+Version: 0.7.0
 Release: fdm
 BuildArch: x86_64
 
@@ -14,7 +14,12 @@ Prefix: %{_prefix}
 Source1: consul.service
 Source2: consul.sysconfig
 Source3: consul.base
-SOurce4: https://releases.hashicorp.com/consul/%{version}/consul_%{version}_web_ui.zip 
+Source4: https://releases.hashicorp.com/consul/%{version}/consul_%{version}_web_ui.zip 
+
+%changelog
+* Wed Sep 28  2016 Thornton Prime <thornton.prime@gmail.com> [0.7.0]
+- Update to 0.7.0
+- Build with go1.7
 
 %description
 Consul is a tool for service discovery and configuration.
@@ -25,12 +30,17 @@ Consul is distributed, highly available, and extremely scalable.
 export GOPATH=`pwd`
 %{__mkdir} -p src/github.com/hashicorp
 git clone --branch v%{version} https://github.com/hashicorp/consul.git src/github.com/hashicorp/consul
-( cd src/github.com/hashicorp/consul; git checkout -b v%{version}; git branch --set-upstream-to=origin/master v%{version})
+( 
+  cd src/github.com/hashicorp/consul
+  git checkout -b v%{version}
+  git branch --set-upstream-to=origin/master v%{version}
+)
 
 
 %build
 export GOPATH=`pwd`
 (
+  export PATH=${GOPATH}/bin:${PATH}
   cd src/github.com/hashicorp/consul
   make
 )

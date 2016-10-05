@@ -68,7 +68,7 @@ export GOPATH=`pwd`
 go get -f -u github.com/%{git_package}/...
 
 %install
-%{__install} -D rclone ${RPM_BUILD_ROOT}%{_bindir}/rclone
+%{__install} -D bin/rclone ${RPM_BUILD_ROOT}%{_bindir}/rclone
 %{__install} -D src/github.com/ncw/rclone/rclone.1 ${RPM_BUILD_ROOT}%{_mandir}/man1/rclone.1
 
 %clean

@@ -4,7 +4,7 @@ License: MIT
 Group: Applications/Editors
 Url: https://github.com/zyedidia/micro
 
-%define git_version 1.0.2
+%define git_version 1.0.3
 %define git_package zyedidia/micro
 
 Version: %{git_version}
