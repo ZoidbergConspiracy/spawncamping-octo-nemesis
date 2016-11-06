@@ -1,45 +1,31 @@
-Name: python-gspread
-Summary: Python Google Spreadsheets API
-License: Apache
-URL: https://github.com/burnash/gspread
+Name: python-spacy
+Summary: Industrial-strength Natural Language Processing (NLP) with Python and Cython
+License: MIT
+URL: https://spacy.io
 Group: Development/Tools
 
 Packager: Thornton Prime <thornton.prime@gmail.com>
-Distribution: FDM 6
+Distribution: FDM
 
-Version: 0.4.1
-Release: 1.fdm
-Epoch: %( date +"%Y%m%d" )
-BuildArch: noarch
-
-%description
-Manage your spreadsheets with gspread in Python.
-
-Features:
-
-    Open a spreadsheet by its title or url.
-    Extract range, entire row or column values.
-    Independent of Google Data Python client library.
-    Python 3 support.
-
-
-%changelog
-* Fri Oct 28 2016 Thornton Prime <thornton.prime@gmail.com> [0.4.1]
-- Update to 0.4.1
-* Thu Apr  7 2016 Thornton Prime <thornton.prime@gmail.com> [0.3.0]
-- Updated to pull directly from git
-* Sat Oct 27 2012 Thornton Prime <thornton@yoyoweb.com> []
-- 
-
-%define python_package gspread
-%define git_package burnash/gspread
-%define git_version v%{version}
+%define python_package spacy
+%define git_package explosion/spacy
+%define git_version 1.0.0
 %define __python /usr/bin/python2
 
 Version: %{git_version}
 Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+
+%changelog
+* Fri Oct 21 2016 Thornton Prime <thornton.prime@gmail.com> [1.0.0]
+- Build for FDM24
+
+%description
+spaCy is a library for advanced natural language processing in Python
+and Cython. See here for documentation and details. spaCy is built on
+the very latest research, but it isn't researchware. It was designed
+from day 1 to be used in real products. 
 
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
 %define python_version_short %( %{__python} -c 'import sys; print ".".join(sys.version.split()[0].split(".")[:2])' )
@@ -48,11 +34,15 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 # Turn off the brp-python-bytecompile script
 %global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
 
+BuildRequires: Cython python2-numpy python2-ujson
+BuildRequires: python-six python-pathlib
+# BuildRequires: python3-Cython
+
 %prep
 %setup -cT
 git clone https://github.com/%{git_package}.git .
-git checkout -b %{git_version}
-git branch --set-upstream-to=origin/master %{git_version}
+git checkout -b v%{git_version}
+git branch --set-upstream-to=origin/master v%{git_version}
 
 %build
 env CFLAGS="%{optflags}" %{__python} setup.py build
@@ -67,5 +57,4 @@ env CFLAGS="%{optflags}" %{__python} setup.py build
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root)
-%doc README* LICENSE*
 
