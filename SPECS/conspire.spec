@@ -1,13 +1,17 @@
 Name: conspire
 Summary: Share Secrets with Friends
-Version: 0.9.5
-Release: fdm
 License: MIT
 Group: System/Utilities
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Prefix: %{_prefix}
-BuildArch: x86_64
 Url: https://github.com/ZoidbergConspiracy/conspire
+
+%define git_version 0.9.5
+%define git_package zoidbergconspiracy/%{name}
+
+Version: 0.9.5
+Release: 1.fdm
+BuildArch: x86_64
+Prefix: %{_prefix}
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Conspire is a tool for setting up and managing Conspiracies.
@@ -21,33 +25,37 @@ because there is no facility to manage groups. This tool aims to make it
 simpler to manage secrets among groups.
 
 %changelog
+* Tue Nov 29 2016 Thornton Prime <thornton.prime@gmail.com> [0.9.5]
+- Build for Fedora 25
+
 * Thu Apr  7 2016 Thornton Prime <thornton.prime@gmail.com> [0.9.5]
 - Fixed paths.
 - Update to v0.9.5
 * Thu Apr  7 2016 Thornton Prime <thornton.prime@gmail.com> [0.9.0]
 - Updated to pull directly from git
 
+%files
+%defattr(-,root,root)
+%{_bindir}/conspire
 
 %prep
 
 %setup -cT
 export GOPATH=`pwd`
-
-mkdir -p src/github.com/odeke-em/conspire
-git clone --branch v%{version} https://github.com/zoidbergconspiracy/conspire.git src/github.com/zoidbergconspiracy/conspire
-go get -f -u ./... || true
+git clone https://github.com/%{git_package}.git src/github.com/%{git_package}
+(
+  cd src/github.com/%{git_package}
+  git checkout -b v%{git_version}
+  git branch --set-upstream-to=origin/master v%{git_version}
+)
 
 %build
 export GOPATH=`pwd`
-go build github.com/zoidbergconspiracy/conspire
+go get -f -u github.com/%{git_package}
 
 %install
-%{__install} -D conspire ${RPM_BUILD_ROOT}%{_bindir}/conspire
+%{__install} -D bin/conspire ${RPM_BUILD_ROOT}%{_bindir}/conspire
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%files
-%defattr(-,root,root)
-%{_bindir}/conspire
 
