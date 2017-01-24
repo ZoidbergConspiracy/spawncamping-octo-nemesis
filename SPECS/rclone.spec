@@ -4,7 +4,7 @@ License: MIT
 Group: Applications/Internet
 Url: http://rclone.org/
 
-%define git_version 1.34
+%define git_version 1.35
 %define git_package ncw/rclone
 
 Version: %{git_version}

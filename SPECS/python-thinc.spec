@@ -1,38 +1,37 @@
-Name: python-spacy
-Summary: Industrial-strength Natural Language Processing (NLP) with Python and Cython
+Name: python-thinc
+Summary: spaCy's Machine Learning library for NLP in Python
 License: MIT
-URL: https://spaCy.io
+URL: https://github.com/explosion/thinc
 Group: Development/Tools
 
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM
 
-%define python_package spacy
-%define git_package explosion/spacy
-%define git_version 1.6.0
+%define python_package thinc
+%define git_package explosion/thinc
+%define git_version 6.2.0
 %define __python /usr/bin/python2
 
 Version: %{git_version}
-Release: 2.fdm
+Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-
-Requires: python2-numpy python2-ujson python2-tqdm python2-toolz python2-Cython python2-cytoolz
-Requires: python-six python-pathlib python-flexmock 
-
-Requires: python-cymem python-thinc
-Requires: python-sputnik
-Requires: python-semver python-cloudpickle python-plac 
+BuildRequires: python-preshed python-murmurhash
 
 %changelog
-* Fri Oct 21 2016 Thornton Prime <thornton.prime@gmail.com> [1.0.0]
-- Build for FDM24
+* Mon Jan 23 2017 Thornton Prime <thornton.prime@gmail.com> [6.2.0]
+- Build for FDM25
 
 %description
-spaCy is a library for advanced natural language processing in Python
-and Cython. See here for documentation and details. spaCy is built on
-the very latest research, but it isn't researchware. It was designed
-from day 1 to be used in real products. 
+Thinc is the machine learning library powering spaCy. It features a
+battle-tested linear model designed for large sparse learning problems,
+and a flexible neural network model under development for spaCy v2.0.
+
+Thinc is a practical toolkit for implementing models that follow the
+"Embed, encode, attend, predict" architecture. It's designed to be easy
+to install, efficient for CPU usage and optimised for NLP and deep learning
+with text – in particular, hierarchically structured input and variable-
+length sequences.
 
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
 %define python_version_short %( %{__python} -c 'import sys; print ".".join(sys.version.split()[0].split(".")[:2])' )
@@ -41,7 +40,7 @@ from day 1 to be used in real products.
 # Turn off the brp-python-bytecompile script
 %global __os_install_post %(echo '%{__os_install_post}' | sed -e 's!/usr/lib[^[:space:]]*/brp-python-bytecompile[[:space:]].*$!!g')
 
-# BuildRequires: python3-Cython
+BuildRequires: python2-Cython
 
 %prep
 %setup -cT
