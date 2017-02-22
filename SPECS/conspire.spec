@@ -5,10 +5,10 @@ Group: System/Utilities
 Url: https://github.com/ZoidbergConspiracy/conspire
 
 %define git_version 0.9.5
-%define git_package zoidbergconspiracy/%{name}
+%define git_url zoidbergconspiracy/%{name}
 
 Version: 0.9.5
-Release: 1.fdm
+Release: 2.fdm
 BuildArch: x86_64
 Prefix: %{_prefix}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -25,6 +25,9 @@ because there is no facility to manage groups. This tool aims to make it
 simpler to manage secrets among groups.
 
 %changelog
+* Wed Feb 22 2017 Thornton Prime <thornton.prime@gmail.com> [0.9.5]
+- New build from github template
+- Compile with go1.8
 * Tue Nov 29 2016 Thornton Prime <thornton.prime@gmail.com> [0.9.5]
 - Build for Fedora 25
 
@@ -42,16 +45,16 @@ simpler to manage secrets among groups.
 
 %setup -cT
 export GOPATH=`pwd`
-git clone https://github.com/%{git_package}.git src/github.com/%{git_package}
+git clone https://github.com/%{git_url}.git src/github.com/%{git_url}
 (
-  cd src/github.com/%{git_package}
+  cd src/github.com/%{git_url}
   git checkout -b v%{git_version}
   git branch --set-upstream-to=origin/master v%{git_version}
 )
 
 %build
 export GOPATH=`pwd`
-go get -f -u github.com/%{git_package}
+go get -f -u github.com/%{git_url}
 
 %install
 %{__install} -D bin/conspire ${RPM_BUILD_ROOT}%{_bindir}/conspire

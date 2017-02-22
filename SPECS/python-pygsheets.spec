@@ -1,45 +1,46 @@
-%define python_version 2
-%define __python /usr/bin/python2
+%define python_major 3
 
-Name: python%{python_version}-gspread
-Summary: Python Google Spreadsheets API
-License: Apache
-URL: https://github.com/burnash/gspread
+Name: python%{python_major}-pygsheets
+Summary: Python Google Sheets API
+License: MIT
 Group: Development/Tools
+URL: http://pygsheets.readthedocs.io/
 
 Packager: Thornton Prime <thornton.prime@gmail.com>
-Distribution: FDM 6
+Distribution: FDM 25
 
-Version: 0.6.2
+Version: 1.0.0
 Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
 
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildArch: noarch
+Requires: python-enum python%{python_major}-google-api-client
+
 %description
-Manage your spreadsheets with gspread in Python.
+Simple, intutive library for google sheets which gets most of your work done.
 
 Features:
-
-  Open a spreadsheet by its title or url.
-  Extract range, entire row or column values.
-  Independent of Google Data Python client library.
-  Python 3 support.
-
+* Google spreadsheet api v4 support
+* Open, create, delete and share spreadsheets using title or key
+* Control permissions of spreadsheets.
+* Extract range, entire row or column values.
+* Do all the updates and push the changes in a batch
 
 %changelog
+* Mon Feb 20 2017 Thornton Prime <thornton.prime@gmail.com> [1.0.0]
+- Build from git 1.0.0
 * Fri Oct 28 2016 Thornton Prime <thornton.prime@gmail.com> [0.4.1]
 - Update to 0.4.1
 * Thu Apr  7 2016 Thornton Prime <thornton.prime@gmail.com> [0.3.0]
 - Updated to pull directly from git
 * Sat Oct 27 2012 Thornton Prime <thornton@yoyoweb.com> []
 - 
-
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildArch: noarch
-
-%define python_package gspread
-%define git_package burnash/gspread
+%define python_package pygsheets
+%define git_package nithinmurali/%{python_package}
 %define git_version v%{version}
 
+%define __python /usr/bin/python%{python_major}
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
 %define python_version_short %( %{__python} -c 'import sys; print ".".join(sys.version.split()[0].split(".")[:2])' )
 %define python_site_packages %( %{__python} -c 'import sys; print [x for x in sys.path if x[-13:] == "site-packages" ][0]' )

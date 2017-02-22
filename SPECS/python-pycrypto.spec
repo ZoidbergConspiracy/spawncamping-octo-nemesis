@@ -1,29 +1,23 @@
 %define python_version 2
 %define __python /usr/bin/python2
 
-Name: python%{python_version}-gspread
-Summary: Python Google Spreadsheets API
+Name: python%{python_version}-pycrypto
+Summary: Python Cryptography Toolkit
 License: Apache
-URL: https://github.com/burnash/gspread
+URL: https://www.dlitz.net/software/pycrypto/
 Group: Development/Tools
 
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM 6
 
-Version: 0.6.2
+Version: 2.6
 Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
 
 %description
-Manage your spreadsheets with gspread in Python.
-
-Features:
-
-  Open a spreadsheet by its title or url.
-  Extract range, entire row or column values.
-  Independent of Google Data Python client library.
-  Python 3 support.
-
+This is a collection of both secure hash functions (such as SHA256 and
+RIPEMD160), and various encryption algorithms (AES, DES, RSA, ElGamal,
+etc.).  The package is structured to make adding new modules easy.
 
 %changelog
 * Fri Oct 28 2016 Thornton Prime <thornton.prime@gmail.com> [0.4.1]
@@ -34,10 +28,9 @@ Features:
 - 
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildArch: noarch
 
-%define python_package gspread
-%define git_package burnash/gspread
+%define python_package pycrypto
+%define git_package dlitz/pycrypto
 %define git_version v%{version}
 
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
@@ -66,5 +59,5 @@ env CFLAGS="%{optflags}" %{__python} setup.py build
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root)
-%doc README* LICENSE*
+%doc README* COPYRIGHT* ACKS*
 
