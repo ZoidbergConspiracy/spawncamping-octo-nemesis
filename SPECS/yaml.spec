@@ -3,7 +3,7 @@ Summary: Command line YAML processor
 License: MIT
 Group: System/Utilities
 
-%define git_version 1.5
+%define git_version 1.6
 %define git_package mikefarah/%{name}
 
 Version: %{git_version}

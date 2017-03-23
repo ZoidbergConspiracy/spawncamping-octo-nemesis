@@ -9,7 +9,7 @@ Distribution: FDM
 
 %define python_package spacy
 %define git_package explosion/spacy
-%define git_version 1.6.0
+%define git_version 1.7.2
 %define __python /usr/bin/python2
 
 Version: %{git_version}

@@ -9,7 +9,13 @@ URL: http://pygsheets.readthedocs.io/
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM 25
 
-Version: 1.0.0
+%define python_package pygsheets
+%define git_path nithinmurali/%{python_package}
+#%define git_tag v%{version}
+%define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
+
+Version: 1.1.0.%( echo %{git_tag} | cut -c 1-8 )git
+# Version: 1.1.0
 Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
 
@@ -28,6 +34,10 @@ Features:
 * Do all the updates and push the changes in a batch
 
 %changelog
+* Tue Mar 21 2017 Thornton Prime <thornton.prime@gmail.com> [1.1.0.git]
+- Build from git latest master
+* Tue Mar 21 2017 Thornton Prime <thornton.prime@gmail.com> [1.1.0]
+- Build from git 1.0.0
 * Mon Feb 20 2017 Thornton Prime <thornton.prime@gmail.com> [1.0.0]
 - Build from git 1.0.0
 * Fri Oct 28 2016 Thornton Prime <thornton.prime@gmail.com> [0.4.1]
@@ -36,9 +46,6 @@ Features:
 - Updated to pull directly from git
 * Sat Oct 27 2012 Thornton Prime <thornton@yoyoweb.com> []
 - 
-%define python_package pygsheets
-%define git_package nithinmurali/%{python_package}
-%define git_version v%{version}
 
 %define __python /usr/bin/python%{python_major}
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
@@ -50,9 +57,9 @@ Features:
 
 %prep
 %setup -cT
-git clone https://github.com/%{git_package}.git .
-git checkout -b %{git_version}
-git branch --set-upstream-to=origin/master %{git_version}
+git clone https://github.com/%{git_path}.git .
+git checkout -b %{git_tag}
+git branch --set-upstream-to=origin/master %{git_tag}
 
 %build
 env CFLAGS="%{optflags}" %{__python} setup.py build
