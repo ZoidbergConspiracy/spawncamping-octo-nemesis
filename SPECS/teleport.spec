@@ -9,7 +9,7 @@ Group: System/Utilities
 
 #Version: 0.%( echo %{git_tag} | cut -c 1-8 )git
 Version: 2.0.0.rc2
-Release: 2.fdm
+Release: 4.fdm
 URL: http://gravitational.com/teleport/
 #URL: https://github.com/%{git_package}
 
@@ -48,7 +48,7 @@ Teleport enables teams to easily adopt the best SSH practices like:
 %{_sbindir}/*
 %{_unitdir}/teleport.service
 %dir %{_sharedstatedir}/teleport
-%config %{_sysconfdir}/sysconfig/teleport
+%config(noreplace) %{_sysconfdir}/sysconfig/teleport
 
 %prep
 
@@ -77,7 +77,7 @@ After=network.target
 Type=simple
 Restart=always
 EnvironmentFile=/etc/sysconfig/teleport
-ExecStart=/usr/sbin/teleport start $TELEPORT_OPTIONS
+ExecStart=/usr/sbin/teleport start \$OPTIONS
 
 [Install]
 WantedBy=multi-user.target
@@ -87,10 +87,14 @@ cat >> teleport.sysconfig <<_SYSCONFIG_
 # Options for teleport
 #
 # Should work by default with no flags
-TELEPORT_OPTIONS=""
+OPTIONS=""
 
 # Alternative would be to specify a config file
-#TELEPORT_OPTIONS="--config=/etc/teleport.yaml"
+#OPTIONS="--config=/etc/teleport.yaml"
+
+# Or some simple tags
+#OPTIONS='--labels kernel=[1h:"uname -r"],platform=[24h:"uname -o"]'
+
 _SYSCONFIG_
 
 tar xvfz src/github.com/%{git_path}/teleport-*-bin.tar.gz
