@@ -8,10 +8,10 @@ Group: System/Utilities
 %define git_tag v2.0.0-rc.2
 
 #Version: 0.%( echo %{git_tag} | cut -c 1-8 )git
-Version: 2.0.0.rc2
-Release: 4.fdm
+Version: 2.0.1
+Release: 1.fdm
 URL: http://gravitational.com/teleport/
-#URL: https://github.com/%{git_package}
+#URL: https://github.com/%{git_path}
 
 BuildArch: x86_64
 Prefix: %{_prefix}
@@ -36,6 +36,8 @@ Teleport enables teams to easily adopt the best SSH practices like:
 * Keep the full audit log of all SSH sessions within a cluster.
 
 %changelog
+* Wed Apr 12 2017 Thornton Prime <thornton.prime@gmail.com> [2.0.1]
+
 * Mon Mar 27 2017 Thornton Prime <thornton.prime@gmail.com> [2.0.0.rc2]
 - Basic build from Github
 
