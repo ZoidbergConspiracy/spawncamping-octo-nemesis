@@ -3,7 +3,7 @@ Summary: Command line YAML processor
 License: MIT
 Group: System/Utilities
 
-%define git_version 1.8
+%define git_version 1.10
 %define git_path mikefarah/%{name}
 
 Version: %{git_version}
@@ -20,6 +20,7 @@ yaml is a lightweight and flexible command-line YAML processor
 The aim of the project is to be the jq or sed of yaml files.
 
 %changelog
+* Wed Apr 26 2017 Thornton Prime <thornton.prime@gmail.com> [1.10]
 * Wed Apr 12 2017 Thornton Prime <thornton.prime@gmail.com> [1.8]
 * Wed Feb  9 2017 Thornton Prime <thornton.prime@gmail.com> [1.5]
 - Basic build from Github
