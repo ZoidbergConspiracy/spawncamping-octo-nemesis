@@ -1,4 +1,6 @@
-Name: python-textblob
+%define python_major 3
+
+Name: python%{python_major}-textblob
 Summary: Simple, Pythonic, text processing
 License: MIT
 URL: https://textblob.readthedocs.io/
@@ -8,16 +10,21 @@ Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM
 
 %define python_package TextBlob
-%define git_package sloria/TextBlob
-%define git_version 0.11.1
-%define __python /usr/bin/python2
+%define git_path sloria/TextBlob
+%define git_version 0.12.0
+%define git_tag %{git_version}
+#%define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 
 Version: %{git_version}
+#Version: Version: %{git_version}_%( echo %{git_tag} | cut -c 1-8 )git
 Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %changelog
+* Thu May 18 2017 Thornton Prime <thornton.prime@gmail.com> [0.12.0]
+- Update for Python3
+- Build for FDM25
 * Wed Oct 05 2016 Thornton Prime <thornton.prime@gmail.com> [0.11.1]
 - Build for FDM24
 
@@ -27,6 +34,7 @@ a simple API for diving into common natural language processing (NLP) tasks
 such as part-of-speech tagging, noun phrase extraction, sentiment analysis,
 classification, translation, and more.
 
+%define __python /usr/bin/python%{python_major}
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
 %define python_version_short %( %{__python} -c 'import sys; print ".".join(sys.version.split()[0].split(".")[:2])' )
 %define python_site_packages %( %{__python} -c 'import sys; print [x for x in sys.path if x[-13:] == "site-packages" ][0]' )
@@ -36,9 +44,9 @@ classification, translation, and more.
 
 %prep
 %setup -cT
-git clone https://github.com/%{git_package}.git .
-git checkout -b %{git_version}
-git branch --set-upstream-to=origin/master %{git_version}
+git clone https://github.com/%{git_path}.git .
+git checkout -b %{git_tag}
+git branch --set-upstream-to=origin/master %{git_tag}
 
 %build
 env CFLAGS="%{optflags}" %{__python} setup.py build
