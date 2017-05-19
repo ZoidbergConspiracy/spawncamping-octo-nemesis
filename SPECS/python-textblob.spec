@@ -13,7 +13,7 @@ Distribution: FDM
 %define git_path sloria/TextBlob
 %define git_version 0.12.0
 %define git_tag %{git_version}
-#%define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
+%define git_tagx %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 
 Version: %{git_version}
 #Version: Version: %{git_version}_%( echo %{git_tag} | cut -c 1-8 )git
