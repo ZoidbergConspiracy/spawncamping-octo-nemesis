@@ -1,18 +1,18 @@
 %define python_major 3
 
-Name: python%{python_major}-murmurhash
-Summary: Cython bindings for Murmurhash2
+Name: python%{python_major}-wptools
+Summary: Wikipedia Tools for Humans
 License: MIT
-URL: https://github.com/explosion/murmurhash
+URL: https://github.com/siznax/wptools
 Group: Development/Tools
 
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM
 
-%define python_package murmurhash
-%define git_path explosion/murmurhash
-%define git_version 0.28.0
-%define git_tagx v%{git_version}
+%define python_package wptools
+%define git_path siznax/wptools
+%define git_version 0
+%define xgit_tag v%{git_version}
 %define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 
 #Version: %{git_version}
@@ -21,14 +21,24 @@ Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
-Requires: python%{python_major}-Cython
-
 %changelog
-* Tue Jun 13 2017 Thornton Prime <thornton.prime@gmail.com> [0.28.0_git]
+* Mon Jul 10 2017 Thornton Prime <thornton.prime@gmail.com> [0_git]
 - Update for Python3
+- Build for FDM25
 
 %description
-Cython bindings for MurmurHash2
+Python and command-line MediaWiki access for Humans.
+
+get an HTML or plain text "extract" (lead or summary)
+get a representative image (pageimage, thumb, etc.)
+get an Infobox as a python dictionary
+get any/all Wikidata by title
+get info in any language
+get random info
+
+This package is intended to make it as easy as possible to get data from
+MediaWiki instances, expose more Wikidata, and extend Wikimedia APIs just
+for kicks.
 
 %define __python /usr/bin/python%{python_major}
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
@@ -45,7 +55,8 @@ git checkout -b %{git_tag}
 git branch --set-upstream-to=origin/master %{git_tag}
 
 %build
-CFLAGS="%{optflags}" LANG=en_US.UTF-8 %{__python} setup.py build
+env > foo.txt
+LANG=en_US.UTF-8 %{__python} setup.py build
 
 %install
 %{__rm} -rf %{buildroot}
