@@ -4,7 +4,7 @@ License: BSD-2-Clause
 Group: System/Utilities
 URL: https://restic.github.io/
 
-%define git_version 0.6.1
+%define git_version 0.7.0
 %define git_path restic/%{name}
 
 Version: %{git_version}

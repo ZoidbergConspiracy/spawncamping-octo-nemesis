@@ -4,8 +4,8 @@ Group: Applications/System
 License: GPLv3
 URL: http://rmlint.rtfd.org
 
-Version: 2.4.6
-Release: 0.fdm
+Version: 2.6.1
+Release: 1.fdm
 Source0: https://github.com/sahib/rmlint/archive/rmlint-%{version}.tar.gz
 Requires: glib2 libblkid elfutils-libelf json-glib
 BuildRequires: scons python3-sphinx gettext libblkid-devel elfutils-libelf-devel glib2-devel json-glib-devel
@@ -15,6 +15,8 @@ rmlint finds space waste and other broken things and offers to remove it. It is
 especially an extremely fast tool to remove duplicates from your filesystem.
 
 %changelog
+* Fri Jul 14 2017 Thornton Prime <thornton.prime@gmail.com> [2.6.1]
+- Update to FDM26 and 2.6.1
 * Mon May 29 2017 Thornton Prime <thornton.prime@gmail.com> [2.4.5]
 - Update to FDM and 2.4.5
 * Sun May 10 2015 Christopher Pahl <sahib@online.de> - 2.2.0

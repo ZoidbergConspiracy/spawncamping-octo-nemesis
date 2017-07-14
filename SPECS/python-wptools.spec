@@ -17,9 +17,14 @@ Distribution: FDM
 
 #Version: %{git_version}
 Version: %{git_version}_%( echo %{git_tag} | cut -c 1-8 )git
-Release: 1.fdm
+Release: 2.fdm
 Epoch: %( date +"%Y%m%d" )
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+
+Requires: python%{python_major}-certifi
+Requires: python%{python_major}-html2text
+Requires: python%{python_major}-lxml
+Requires: python%{python_major}-pycurl
 
 %changelog
 * Mon Jul 10 2017 Thornton Prime <thornton.prime@gmail.com> [0_git]

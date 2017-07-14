@@ -8,7 +8,7 @@ Url: https://github.com/ZoidbergConspiracy/conspire
 %define git_url zoidbergconspiracy/%{name}
 
 Version: 0.9.5
-Release: 2.fdm
+Release: 3.fdm
 BuildArch: x86_64
 Prefix: %{_prefix}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -25,6 +25,7 @@ because there is no facility to manage groups. This tool aims to make it
 simpler to manage secrets among groups.
 
 %changelog
+* Thu Jul 13 2017 Thornton Prime <thornton.prime@gmail.com> [0.9.5]
 * Wed Feb 22 2017 Thornton Prime <thornton.prime@gmail.com> [0.9.5]
 - New build from github template
 - Compile with go1.8

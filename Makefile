@@ -1,6 +1,6 @@
 
-FDMHOST=root@lanka
-FDMROOT=/var/www/html/fdm
+FDMHOST=root@prajna
+FDMROOT=/data/software/fdm
 
 FDMDST=$(shell lsb_release -i | cut -d ':' -f 2 | sed -e 's/[[:space:]]//' | tr 'A-Z' 'a-z' )
 FDMREL=$(shell lsb_release -r | cut -d ':' -f 2 | sed -e 's/[[:space:]]//' | cut -d. -f1 )
