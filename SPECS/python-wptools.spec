@@ -11,7 +11,7 @@ Distribution: FDM
 
 %define python_package wptools
 %define git_path siznax/wptools
-%define git_version 0
+%define git_version 0.4
 %define xgit_tag v%{git_version}
 %define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 

@@ -4,16 +4,18 @@ License: MIT
 Group: Applications/Internet
 Url: http://rclone.org/
 
-%define git_version 1.36
+%define git_version 1.38
 %define git_path ncw/rclone
 
 Version: %{git_version}
-Release: fdm
+Release: 1.fdm
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Prefix: %{_prefix}
 BuildArch: x86_64
 
 %changelog
+* Thu Aug 31 2017 Thornton Prime <thornton.prime@gmail.com> [1.37]
+- Update and build with go1.9
 * Sat Apr  8 2017 Thornton Prime <thornton.prime@gmail.com> [1.36]
 * Wed Aug 31 2016 Thornton Prime <thornton.prime@gmail.com> [1.33]
 * Thu Aug 18 2016 Thornton Prime <thornton.prime@gmail.com> [1.32]

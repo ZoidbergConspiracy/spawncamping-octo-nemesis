@@ -4,11 +4,11 @@ License: BSD-2-Clause
 Group: System/Utilities
 URL: https://restic.github.io/
 
-%define git_version 0.7.0
+%define git_version 0.7.3
 %define git_path restic/%{name}
 
 Version: %{git_version}
-Release: 0.fdm
+Release: 1.fdm
 BuildArch: x86_64
 Prefix: %{_prefix}
 
@@ -19,6 +19,8 @@ restic is a program that does backups right. The design goals are to
 be easy, fast, verifiable, secure, efficient, and free.
 
 %changelog
+* Thu Aug 31 2017 Thornton Prime <thornton.prime@gmail.com> [0.7.1]
+- Update and build with go1.9
 * Sat Jun  3 2017 Thornton Prime <thornton.prime@gmail.com> [0.6.1]
 - Basic build from Github
 

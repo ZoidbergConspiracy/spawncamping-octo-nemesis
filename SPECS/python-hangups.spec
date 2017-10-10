@@ -1,17 +1,17 @@
 %define python_major 3
 
-Name: python%{python_major}-wsgidav
+Name: python%{python_major}-hangups
 Summary: Python implemntation of WebDAV Server
 License: MIT
-URL: https://github.com/mar10/wsgidav
+URL: https://github.com/mar10/hangups
 Group: Development/Tools
 
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM
 
-%define python_package wsgidav
-%define git_path mar10/wsgidav
-%define git_version 2.2.4
+%define python_package hangups
+%define git_path tdryer/hangups
+%define git_version 2.2.2
 %define git_tag v%{git_version}
 %define xgit_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 
@@ -25,10 +25,6 @@ Requires: python%{python_major}-defusedxml python%{python_major}-lxml
 %changelog
 * Wed Jul 12 2017 Thornton Prime <thornton.prime@gmail.com> [2.2.2]
 - Build for FDM26
-* Sat May 13 2017 Thornton Prime <thornton.prime@gmail.com> [2.2.1]
-- Build for Python3
-* Fri Jan 20 2017 Thornton Prime <thornton.prime@gmail.com> [git]
-- Build for FDM25
 
 %description
 WsgiDAV is a generic WebDAV server written in Python and based on WSGI.
