@@ -11,7 +11,7 @@ Distribution: FDM
 
 %define python_package spacy
 %define git_path explosion/spacy
-%define git_version 1.8.2
+%define git_version 2.0.2
 %define git_tag v%{git_version}
 %define git_tagx %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 
@@ -69,7 +69,7 @@ git checkout -b %{git_tag}
 git branch --set-upstream-to=origin/master %{git_tag}
 
 %build
-env CFLAGS="%{optflags}" %{__python} setup.py build
+env CFLAGS="%{optflags} -I/usr/lib64/python3.6/site-packages" %{__python} setup.py build
 
 %install
 %{__rm} -rf %{buildroot}
