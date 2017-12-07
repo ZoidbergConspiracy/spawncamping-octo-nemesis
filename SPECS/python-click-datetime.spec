@@ -1,6 +1,6 @@
 %define python_major 3
   
-Name: python%{python_major}-pyhs100
+Name: python%{python_major}-click-datetime
 Summary: API for Managing TP-Link Power Switches and Bulbs
 License: GPLv3
 Group: Development/Tools
@@ -8,29 +8,27 @@ Group: Development/Tools
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM
 
-%define python_package pyHS100
-%define git_path GadgetReactor/%{python_package}
-%define git_version 0.3.0
-%define xgit_tag %{git_version}
-%define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
+%define python_package click-datetime
+%define git_path click-contrib/%{python_package}
+%define git_version 0.2.0
+%define git_tag %{git_version}
+%define xgit_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 
-#Version: %{git_version}
-Version: %{git_version}_git%( echo %{git_tag} | cut -c 1-8 )
+Version: %{git_version}
+#Version: %{git_version}_git%( echo %{git_tag} | cut -c 1-8 )
 Release: 2.fdm
 Epoch: %( date +"%Y%m%d" )
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 
-Requires: python%{python_major}-click
+Requires: python%{python_major}-click python%{python_major}-wheel
 
 %changelog
-* Wed Oct 11 2017 Thornton Prime <thornton.prime@gmail.com> [0.3.0]
+* Thu Dec  7 2017 Thornton Prime <thornton.prime@gmail.com> [0.2.0]
 - Updated to 0.3.0
-* Mon Jan 30 2017 Thornton Prime <thornton.prime@gmail.com> [%{git_tag}]
-- Build for FDM25
 
 %description
-Python Library to control TPLink Switch (HS100 / HS110)
+Python click extension to handle datetime.
 
 %define __python /usr/bin/python%{python_major}
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
@@ -59,4 +57,4 @@ env CFLAGS="%{optflags}" %{__python} setup.py build
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root)
-%doc README.md LICENSE
+%doc README.md
