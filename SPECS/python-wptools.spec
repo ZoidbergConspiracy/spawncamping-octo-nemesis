@@ -11,7 +11,7 @@ Distribution: FDM
 
 %define python_package wptools
 %define git_path siznax/wptools
-%define git_version 0.4
+%define git_version 0.4.7
 %define xgit_tag v%{git_version}
 %define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 
@@ -27,6 +27,8 @@ Requires: python%{python_major}-lxml
 Requires: python%{python_major}-pycurl
 
 %changelog
+* Thu Jan 18 2018 Thornton Prime <thornton.prime@gmail.com> [0.4.7_git]
+- Update to latest version plus git.
 * Mon Jul 10 2017 Thornton Prime <thornton.prime@gmail.com> [0_git]
 - Update for Python3
 - Build for FDM25

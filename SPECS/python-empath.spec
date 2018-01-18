@@ -1,40 +1,34 @@
 %define python_major 3
   
-Name: python%{python_major}-blitzdb
-Summary: Document-oriented database for Python that is backend-agnostic
+Name: python%{python_major}-empath
+Summary: TOol for analyzing text across lexical categories
 License: MIT
 Group: Development/Tools
 
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM
 
-%define python_package blitzdb
-%define git_path adewes/%{python_package}
-%define git_version 0.4.4
+%define python_package empath-client
+%define git_path Ejhfast/%{python_package}
+%define git_version 0.41
 %define xgit_tag v%{git_version}
 %define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
+%define zgit_tag 3f77509
 
 #Version: {git_version}
 Version: %{git_version}_git%( echo %{git_tag} | cut -c 1-8 )
-Release: 3.fdm
+Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 
-Requires: python%{python_major}-six
-
 %changelog
-* Thu Jan  11 2018 Thornton Prime <thornton.prime@gmail.com> [0.4.4_gitX]
+* Tue Jan  16 2018 Thornton Prime <thornton.prime@gmail.com> [0.41_gitX]
 - Fix version number
-* Thu Jan  11 2018 Thornton Prime <thornton.prime@gmail.com> [0.2.12_gitX]
-- Updated to latest git version
-* Mon Jan  8 2018 Thornton Prime <thornton.prime@gmail.com> [0.2.12]
-- Updated to 0.2.12
 
 %description
-Blitz is a document-oriented database for Python that is backend-agnostic.
-It comes with a flat-file database for JSON documents and provides MongoDB-
-like querying capabilities.
+Empath is a tool for analyzing text across lexical categories (similar to LIWC),
+and also generating new lexical categories to use for an analysis.
 
 %define __python /usr/bin/python%{python_major}
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
@@ -63,4 +57,4 @@ env CFLAGS="%{optflags}" %{__python} setup.py build
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root)
-%doc README.md LICENSE
+%doc README.md LICENSE.txt

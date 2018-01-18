@@ -1,40 +1,36 @@
 %define python_major 3
   
-Name: python%{python_major}-blitzdb
-Summary: Document-oriented database for Python that is backend-agnostic
-License: MIT
+Name: python%{python_major}-scattertext
+Summary: Beautiful visualizations of how language differs among document types
+License: Apache-2.0
 Group: Development/Tools
 
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM
 
-%define python_package blitzdb
-%define git_path adewes/%{python_package}
-%define git_version 0.4.4
+%define python_package scattertext
+%define git_path JasonKessler/%{python_package}
+%define git_version 0.0.2.7.1
 %define xgit_tag v%{git_version}
 %define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 
 #Version: {git_version}
 Version: %{git_version}_git%( echo %{git_tag} | cut -c 1-8 )
-Release: 3.fdm
+Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 
-Requires: python%{python_major}-six
+Requires: python%{python_major}-spacy
 
 %changelog
-* Thu Jan  11 2018 Thornton Prime <thornton.prime@gmail.com> [0.4.4_gitX]
+* Tue Jan  16 2018 Thornton Prime <thornton.prime@gmail.com> [0.0.2.7.1_gitX]
 - Fix version number
-* Thu Jan  11 2018 Thornton Prime <thornton.prime@gmail.com> [0.2.12_gitX]
-- Updated to latest git version
-* Mon Jan  8 2018 Thornton Prime <thornton.prime@gmail.com> [0.2.12]
-- Updated to 0.2.12
 
 %description
-Blitz is a document-oriented database for Python that is backend-agnostic.
-It comes with a flat-file database for JSON documents and provides MongoDB-
-like querying capabilities.
+A tool for finding distinguishing terms in small-to-medium-sized corpora, and
+presenting them in a sexy, interactive scatter plot with non-overlapping term
+labels. Exploratory data analysis just got more fun.
 
 %define __python /usr/bin/python%{python_major}
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
