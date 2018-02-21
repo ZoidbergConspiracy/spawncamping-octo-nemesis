@@ -1,4 +1,4 @@
-Name: yaml
+Name: yq
 Summary: Command line YAML processor
 License: MIT
 Group: System/Utilities
@@ -13,10 +13,12 @@ BuildArch: x86_64
 URL: https://github.com/%{git_path}
 Prefix: %{_prefix}
 
+Obsoletes: yaml <= 1.14.0
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-yaml is a lightweight and flexible command-line YAML processor
+yq is a lightweight and flexible command-line YAML processor
 
 The aim of the project is to be the jq or sed of yaml files.
 
@@ -32,7 +34,7 @@ The aim of the project is to be the jq or sed of yaml files.
 
 %files
 %defattr(-,root,root)
-%{_bindir}/yaml
+%{_bindir}/yq
 
 %prep
 
@@ -50,7 +52,7 @@ export GOPATH=`pwd`
 go get -f -u github.com/%{git_path}
 
 %install
-%{__install} -D bin/yaml ${RPM_BUILD_ROOT}%{_bindir}/yaml
+%{__install} -D bin/yq ${RPM_BUILD_ROOT}%{_bindir}/yq
 
 %clean
 rm -rf $RPM_BUILD_ROOT
