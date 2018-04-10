@@ -11,7 +11,7 @@ Distribution: FDM
 
 %define python_package TextBlob
 %define git_path sloria/TextBlob
-%define git_version 0.13.1
+%define git_version 0.15.1
 %define git_tag %{git_version}
 %define git_tagx %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 

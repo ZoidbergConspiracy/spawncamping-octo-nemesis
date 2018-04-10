@@ -3,7 +3,7 @@ Summary: JSON Stream Editor
 License: MIT
 Group: System/Utilities
 
-%define git_tag 1.0.1
+%define git_tag 1.2.1
 %define git_version  %{git_tag}
 %define git_path tidwall/%{name}
 

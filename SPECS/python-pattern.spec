@@ -1,39 +1,38 @@
-%define python_major 3
+%define python_major 2
 
-Name: python%{python_major}-wsgidav
-Summary: Python implemntation of WebDAV Server
-License: MIT
-URL: https://github.com/mar10/wsgidav
+Name: python%{python_major}-pattern
+Summary: Web Mining Module
+License: BSD-3
+URL: http://www.clips.ua.ac.be/pages/pattern
 Group: Development/Tools
 
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM
 
-%define python_package wsgidav
-%define git_path mar10/wsgidav
-%define git_version 2.2.4
-%define xgit_tag v%{git_version}
+%define python_package pattern
+%define git_path clips/pattern
+%define git_version 2.6
+%define xgit_tag master
 %define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 
 #Version: %{git_version}
 Version: %{git_version}_%( echo %{git_tag} | cut -c 1-8 )git
-Release: 1.fdm
+Release: 2.fdm
 Epoch: %( date +"%Y%m%d" )
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Requires: python%{python_major}-defusedxml python%{python_major}-lxml
+
+Requires: python%{python_major}-certifi
+Requires: python%{python_major}-html2text
+Requires: python%{python_major}-lxml
+Requires: python%{python_major}-pycurl
 
 %changelog
-* Sun Mar 11 2018 Thornton Prime <thornton.prime@gmail.com> [2.2.2_git]
-- Build for latest git
-* Wed Jul 12 2017 Thornton Prime <thornton.prime@gmail.com> [2.2.2]
-- Build for FDM26
-* Sat May 13 2017 Thornton Prime <thornton.prime@gmail.com> [2.2.1]
-- Build for Python3
-* Fri Jan 20 2017 Thornton Prime <thornton.prime@gmail.com> [git]
-- Build for FDM25
+* Fri Mar  2 2018 Thornton Prime <thornton.prime@gmail.com> [2.6]
+- Update to latest version plus git.
 
 %description
-WsgiDAV is a generic WebDAV server written in Python and based on WSGI.
+Web mining module for Python, with tools for scraping, natural language
+processing, machine learning, network analysis and visualization.
 
 %define __python /usr/bin/python%{python_major}
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
@@ -50,11 +49,12 @@ git checkout -b %{git_tag}
 git branch --set-upstream-to=origin/master %{git_tag}
 
 %build
-env CFLAGS="%{optflags}" %{__python} setup.py build
+env > foo.txt
+LANG=en_US.UTF-8 %{__python} setup.py build
 
 %install
 %{__rm} -rf %{buildroot}
-%{__python} setup.py install -O1 --root=%{buildroot} --record=INSTALLED_FILES
+LANG=en_US.UTF-8 %{__python} setup.py install --root=%{buildroot} --record=INSTALLED_FILES
 #find %{buildroot} -type f -name '*.pyo' -printf '/%P%f\n' >> INSTALLED_FILES
 
 %clean
@@ -62,4 +62,4 @@ env CFLAGS="%{optflags}" %{__python} setup.py build
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root)
-%doc LICENSE* README* THANKS* TODO* CHANGELOG* CONTRIBUTING*
+
