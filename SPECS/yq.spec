@@ -3,8 +3,8 @@ Summary: Command line YAML processor
 License: MIT
 Group: System/Utilities
 
-%define git_tag 1.14.1
-%define git_version  %{git_tag}
+%define git_version 1.14.1
+%define git_tag  %{git_version}
 %define git_path mikefarah/%{name}
 
 Version: %{git_version}
@@ -43,8 +43,8 @@ export GOPATH=`pwd`
 git clone https://github.com/%{git_path}.git src/github.com/%{git_path}
 (
   cd src/github.com/%{git_path}
-  git checkout -b %{git_version}
-  git branch --set-upstream-to=origin/master %{git_version}
+  git checkout -b %{git_tag}
+  git branch --set-upstream-to=origin/master %{git_tag}
 )
 
 %build

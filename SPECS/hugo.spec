@@ -1,16 +1,18 @@
 Name: hugo
 Summary: Static Site Generator
-Release: fdm
 License: Apache 2.0
 Group: Applications/Publishing
 Url: http://gohugo.io
 
-Version: 0.16
+%define git_version 0.40.2
+%define git_tag v%{git_version}
+%define git_path gohugoio/%{name}
+
+Version: %{git_version}
+Release: 0.fdm
 BuildArch: x86_64
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Prefix: %{_prefix}
-
-#Source0:  https://github.com/spf13/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 %changelog
 * Thu Jun  9 2016 Thornton Prime <thornton.prime@gmail.com> [0.16]
@@ -33,27 +35,23 @@ millisecond.
 Hugo is designed to work well for any kind of website including blogs,
 tumbles and docs.
 
-%define repo_url https://github.com/spf13/%{name}.git
-%define repo_src_path %( echo %{repo_url} | sed -e 's@^https://@src/@' -e 's@\.git$@@' )
-%define pkg_path %( echo %{repo_url} | sed -e 's@^https://@@' -e 's@\.git$@@' )
-
 %prep
 
 %setup -cT
 export GOPATH=`pwd`
-
-echo %{repo_url}
-mkdir -p %{repo_src_path}
-git clone --branch v%{version} %{repo_url} %{repo_src_path}
-go get -f -u ./... || true
+git clone https://github.com/%{git_path}.git src/github.com/%{git_path}
+(
+  cd src/github.com/%{git_path}
+  git checkout -b %{git_tag}
+  git branch --set-upstream-to=origin/master %{git_tag}
+)
 
 %build
 export GOPATH=`pwd`
-go build %{pkg_path}
+go get -f -u github.com/%{git_path}
 
 %install
-
-%{__install} -D hugo ${RPM_BUILD_ROOT}%{_bindir}/hugo
+%{__install} -D bin/hugo ${RPM_BUILD_ROOT}%{_bindir}/hugo
 
 
 %clean
@@ -62,5 +60,5 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %{_bindir}/hugo
-%doc %{repo_src_path}/{LICENSE.md,README.md}
+%doc src/github.com/%{git_path}/{LICENSE,README.md}
 

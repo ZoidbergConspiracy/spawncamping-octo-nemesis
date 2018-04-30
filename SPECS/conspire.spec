@@ -5,7 +5,7 @@ Group: System/Utilities
 Url: https://github.com/ZoidbergConspiracy/conspire
 
 %define git_version 0.9.5
-%define git_url zoidbergconspiracy/%{name}
+%define git_path zoidbergconspiracy/%{name}
 
 Version: 0.9.5
 Release: 4.fdm
@@ -48,16 +48,16 @@ simpler to manage secrets among groups.
 
 %setup -cT
 export GOPATH=`pwd`
-git clone https://github.com/%{git_url}.git src/github.com/%{git_url}
+git clone https://github.com/%{git_path}.git src/github.com/%{git_path}
 (
-  cd src/github.com/%{git_url}
+  cd src/github.com/%{git_path}
   git checkout -b v%{git_version}
   git branch --set-upstream-to=origin/master v%{git_version}
 )
 
 %build
 export GOPATH=`pwd`
-go get -f -u github.com/%{git_url}
+go get -f -u github.com/%{git_path}
 
 %install
 %{__install} -D bin/conspire ${RPM_BUILD_ROOT}%{_bindir}/conspire
