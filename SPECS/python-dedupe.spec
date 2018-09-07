@@ -1,17 +1,17 @@
 %define python_major 3
 
-Name: python%{python_major}-wsgidav
-Summary: Python implemntation of WebDAV Server
+Name: python%{python_major}-dedupe
+Summary: Python deduplication
 License: MIT
-URL: https://github.com/mar10/wsgidav
+URL: https://docs.dedupe.io/
 Group: Development/Tools
 
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM
 
-%define python_package wsgidav
-%define git_path mar10/wsgidav
-%define git_version 2.3.0
+%define python_package dedupe
+%define git_path dedupeio/dedupe
+%define git_version 1.9.2
 %define xgit_tag v%{git_version}
 %define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 
@@ -33,7 +33,7 @@ Requires: python%{python_major}-defusedxml python%{python_major}-lxml
 - Build for FDM25
 
 %description
-WsgiDAV is a generic WebDAV server written in Python and based on WSGI.
+A python library for accurate and scaleable fuzzy matching, record deduplication and entity-resolution.
 
 %define __python /usr/bin/python%{python_major}
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
@@ -62,4 +62,4 @@ env CFLAGS="%{optflags}" %{__python} setup.py build
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root)
-%doc LICENSE* README* CHANGELOG*
+%doc LICENSE* README* THANKS* TODO* CHANGELOG* CONTRIB* CODE*

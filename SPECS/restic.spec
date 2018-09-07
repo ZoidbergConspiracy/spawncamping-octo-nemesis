@@ -4,7 +4,7 @@ License: BSD-2-Clause
 Group: System/Utilities
 URL: https://restic.github.io/
 
-%define git_version 0.8.3
+%define git_version 0.9.2
 %define git_path restic/%{name}
 
 Version: %{git_version}
@@ -36,16 +36,20 @@ be easy, fast, verifiable, secure, efficient, and free.
 %setup -cT
 export GOPATH=`pwd`
 # git clone https://github.com/%{git_path}.git src/github.com/%{git_path}
-git clone https://github.com/%{git_path}.git .
+git clone https://github.com/%{git_path}.git restic
+(cd restic
 git checkout -b v%{git_version}
 git branch --set-upstream-to=origin/master v%{git_version}
+)
 
 %build
 export GOPATH=`pwd`
-go run build.go --goos linux --goarch amd64
+( cd restic
+go run -mod vendor build.go --goos linux --goarch amd64
+)
 
 %install
-%{__install} -D restic ${RPM_BUILD_ROOT}%{_bindir}/restic
+%{__install} -D restic/restic ${RPM_BUILD_ROOT}%{_bindir}/restic
 
 %clean
 rm -rf $RPM_BUILD_ROOT

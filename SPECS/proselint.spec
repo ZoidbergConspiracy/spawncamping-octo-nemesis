@@ -1,19 +1,19 @@
 %define python_major 3
 
-Name: python%{python_major}-wsgidav
-Summary: Python implemntation of WebDAV Server
+Name: proselint
+Summary: A linter for prose
 License: MIT
-URL: https://github.com/mar10/wsgidav
+URL: http:/proselint.com/
 Group: Development/Tools
 
 Packager: Thornton Prime <thornton.prime@gmail.com>
 Distribution: FDM
 
-%define python_package wsgidav
-%define git_path mar10/wsgidav
-%define git_version 2.3.0
-%define xgit_tag v%{git_version}
-%define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
+%define python_package proselint
+%define git_path amperser/proselint
+%define git_version 0.8.0
+%define git_tag v%{git_version}
+%define xgit_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 
 #Version: %{git_version}
 Version: %{git_version}_%( echo %{git_tag} | cut -c 1-8 )git
@@ -33,7 +33,7 @@ Requires: python%{python_major}-defusedxml python%{python_major}-lxml
 - Build for FDM25
 
 %description
-WsgiDAV is a generic WebDAV server written in Python and based on WSGI.
+A linter for prose
 
 %define __python /usr/bin/python%{python_major}
 %define python_version %( %{__python} -c 'import sys; print sys.version.split()[0]' )
@@ -62,4 +62,4 @@ env CFLAGS="%{optflags}" %{__python} setup.py build
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root)
-%doc LICENSE* README* CHANGELOG*
+%doc LICENSE* README* CHANGELOG* CONTRIB*
