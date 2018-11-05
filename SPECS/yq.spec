@@ -3,8 +3,8 @@ Summary: Command line YAML processor
 License: MIT
 Group: System/Utilities
 
-%define git_version 1.14.1
-%define git_tag  %{git_version}
+%define git_version 2.1.2
+%define git_tag v%{git_version}
 %define git_path mikefarah/%{name}
 
 Version: %{git_version}

@@ -4,7 +4,7 @@ License: MIT
 Group: System/Utilities
 URL: https://ipfs.io
 
-%define git_version 0.4.11
+%define git_version 0.4.17
 %define git_path ipfs/go-ipfs
 
 Version: %{git_version}
