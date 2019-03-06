@@ -10,7 +10,7 @@ Distribution: FDM
 
 %define python_package pyHS100
 %define git_path GadgetReactor/%{python_package}
-%define git_version 0.3.0
+%define git_version 0.3.4
 %define xgit_tag %{git_version}
 %define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 

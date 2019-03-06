@@ -1,11 +1,11 @@
-Name: yq
-Summary: Command line YAML processor
-License: MIT
+Name: yj
+Summary: CLI YAML, TOML, JSON, HCL Conversion
+License: Apache-2.0
 Group: System/Utilities
 
-%define git_version 2.2.1
+%define git_version 3.0
 %define git_tag v%{git_version}
-%define git_path mikefarah/%{name}
+%define git_path sclevine/%{name}
 
 Version: %{git_version}
 Release: 0.fdm
@@ -13,14 +13,10 @@ BuildArch: x86_64
 URL: https://github.com/%{git_path}
 Prefix: %{_prefix}
 
-Obsoletes: yaml <= 1.14.0
-
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-yq is a lightweight and flexible command-line YAML processor
-
-The aim of the project is to be the jq or sed of yaml files.
+CLI - YAML <-> TOML <-> JSON <-> HCL
 
 %changelog
 * Thu Aug 31 2017 Thornton Prime <thornton.prime@gmail.com> [1.12]
@@ -34,7 +30,7 @@ The aim of the project is to be the jq or sed of yaml files.
 
 %files
 %defattr(-,root,root)
-%{_bindir}/yq
+%{_bindir}/yj
 
 %prep
 
@@ -52,7 +48,7 @@ export GOPATH=`pwd`
 go get -f -u github.com/%{git_path}
 
 %install
-%{__install} -D bin/yq ${RPM_BUILD_ROOT}%{_bindir}/yq
+%{__install} -D bin/yj ${RPM_BUILD_ROOT}%{_bindir}/yj
 
 %clean
 rm -rf $RPM_BUILD_ROOT

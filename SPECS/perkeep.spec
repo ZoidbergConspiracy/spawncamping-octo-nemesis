@@ -8,7 +8,7 @@ URL: https://perkeep.github.io/
 %define git_version 0.10
 %define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' | cut -c 1-8 )
 
-# Version: %{git_version}
+# Version: {git_version}
 Version: %{git_version}_%{git_tag}git
 Release: 1.fdm
 BuildArch: x86_64

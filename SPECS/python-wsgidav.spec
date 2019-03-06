@@ -11,11 +11,10 @@ Distribution: FDM
 
 %define python_package wsgidav
 %define git_path mar10/wsgidav
-%define git_version 2.3.0
+%define git_version 3.0.0
 %define xgit_tag v%{git_version}
 %define git_tag %( git ls-remote https://github.com/%{git_path}.git | grep HEAD | awk '{ print $1 }' )
 
-#Version: %{git_version}
 Version: %{git_version}_%( echo %{git_tag} | cut -c 1-8 )git
 Release: 1.fdm
 Epoch: %( date +"%Y%m%d" )
@@ -23,6 +22,8 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: python%{python_major}-defusedxml python%{python_major}-lxml
 
 %changelog
+* Tue Mar  5 2019 Thornton Prime <thornton.prime@gmail.com> [3.0.0_git]
+- Build off latest git for F29
 * Sun Mar 11 2018 Thornton Prime <thornton.prime@gmail.com> [2.2.2_git]
 - Build for latest git
 * Wed Jul 12 2017 Thornton Prime <thornton.prime@gmail.com> [2.2.2]
